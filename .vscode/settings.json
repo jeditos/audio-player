@@ -3,5 +3,7 @@
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
     "editor.formatOnSave": true,
     "files.eol": "\n",
-    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/debug/compile_commands.json"
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/debug/compile_commands.json",
+    "files.autoSave": "onFocusChange",
+    "workbench.colorTheme": "Abyss"
 }

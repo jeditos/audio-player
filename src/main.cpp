@@ -1,11 +1,14 @@
 #include <iostream>
 #include "miniaudio.h"
+#include "decoder.h"
 
 using std::cout;
 
 int main()
 {
 
-    const char *ma_version_string(void);
-    void ma_version(ma_uint32 * pMajor, ma_uint32 * pMinor, ma_uint32 * pRevision);
+       Decoder d("test.wav");
+    cout << d.sampleRate() << " Hz, "
+         << d.channels() << " ch, "
+         << d.totalFrames() << " frames\n";
 }

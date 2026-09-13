@@ -14,7 +14,7 @@ if(MSVC)
   target_compile_options(miniaudio PRIVATE /w)   # silence third-party warnings
 endif()
 
-add_executable(audioplayer src/main.cpp)
+add_executable(audioplayer src/main.cpp src/Decoder.cpp)
 target_link_libraries(audioplayer PRIVATE miniaudio)
 if(MSVC)
   target_compile_options(audioplayer PRIVATE /W4 /permissive- /utf-8)

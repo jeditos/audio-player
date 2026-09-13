@@ -1,0 +1,38 @@
+#include "decoder.h"
+#include <stdexcept>
+
+Decoder::Decoder(const std::filesystem::path &p)
+{
+    ma_result r = ma_decoder_init_file(p.string().c_str(), nullptr, &m_dec);
+    if (r != MA_SUCCESS)
+    {
+        throw std::runtime_error("Couldnt initiate decoder!\n");
+    }
+}
+
+Decoder::~Decoder()
+{
+    ma_decoder_uninit(&m_dec);
+}
+
+uint32_t Decoder::sampleRate() const
+{
+    return m_dec.outputSampleRate;
+}
+
+uint32_t Decoder::channels() const
+{
+    return m_dec.outputChannels;
+}
+
+uint64_t Decoder::totalFrames()
+{
+    ma_uint64 len = 0; // 1. you create the storage
+    ma_result r = ma_decoder_get_length_in_pcm_frames(&m_dec, &len);
+    //            ^ status comes back here                    ^ length gets written in here
+    if (r != MA_SUCCESS)
+    { // 2. did it work?
+        throw std::runtime_error("could not get length");
+    }
+    return len; // 3. now len holds the answer
+}
