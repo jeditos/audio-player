@@ -27,12 +27,12 @@ uint32_t Decoder::channels() const
 
 uint64_t Decoder::totalFrames()
 {
-    ma_uint64 len = 0; // 1. you create the storage
+    ma_uint64 len = 0;
     ma_result r = ma_decoder_get_length_in_pcm_frames(&m_dec, &len);
-    //            ^ status comes back here                    ^ length gets written in here
+
     if (r != MA_SUCCESS)
-    { // 2. did it work?
+    {
         throw std::runtime_error("could not get length");
     }
-    return len; // 3. now len holds the answer
+    return len;
 }
