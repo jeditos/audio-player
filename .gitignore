@@ -1,0 +1,10 @@
+build/
+out/
+.cache/
+.vs/
+CMakeUserPresets.json
+*.exe
+*.obj
+*.pdb
+*.ilk
+.gitattributes * text=auto
