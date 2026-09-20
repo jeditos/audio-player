@@ -1,12 +1,17 @@
 #include "decoder.h"
 #include <stdexcept>
 
+static constexpr ma_format kFormat = ma_format_f32;
+static constexpr uint32_t kChannels = 2;
+static constexpr uint32_t kSampleRate = 48000;
+
 Decoder::Decoder(const std::filesystem::path &p)
 {
-    ma_result r = ma_decoder_init_file(p.string().c_str(), nullptr, &m_dec);
+    ma_decoder_config config = ma_decoder_config_init(kFormat, kChannels, kSampleRate);
+    ma_result r = ma_decoder_init_file(p.string().c_str(), &config, &m_dec);
     if (r != MA_SUCCESS)
     {
-        throw std::runtime_error("Couldnt initiate decoder!\n");
+        throw std::runtime_error("Couldnt initiate decoder!");
     }
 }
 
@@ -36,3 +41,8 @@ uint64_t Decoder::totalFrames()
     }
     return len;
 }
+
+/*read(uint64_t frameIndex, uint64_t frameCount, void *pBuffer){
+
+}
+*/
